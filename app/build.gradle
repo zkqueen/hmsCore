@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'com.huawei.agconnect'
+
 }
 
 android {
@@ -8,7 +10,7 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.zkqueen.hmscore"
+        applicationId "com.zk.hms_push"
         minSdkVersion 19
         targetSdkVersion 29
         versionCode 1
@@ -17,12 +19,27 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        config {
+            // 根据您实际的签名信息，替换以下参数中的xxxx
+            keyAlias 'zk'
+            keyPassword 'kkjj1234'
+            storeFile file('zk.jks')
+            storePassword 'kkjj1234'
+        }
+    }
+
     buildTypes {
+        debug {
+            signingConfig signingConfigs.config
+        }
         release {
+            signingConfig signingConfigs.config
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -42,8 +59,5 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-    implementation 'com.huawei.hms:ads-lite:13.4.46.300'
-
-    implementation 'com.huawei.hms:ads-identifier:3.4.39.302'
-    implementation 'com.huawei.hms:ads-installreferrer:3.4.39.302'
+    implementation 'com.huawei.hms:push:6.5.0.300'
 }
