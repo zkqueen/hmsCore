@@ -34,10 +34,14 @@ class MainActivity : AppCompatActivity() {
 
                     // 判断token是否为空
                     if (!TextUtils.isEmpty(token)) {
-                        Log.e(MainActivity.TAG, "run: $token")
+                        Toast.makeText(this@MainActivity,token,Toast.LENGTH_SHORT)
                     }
                 } catch (e: Exception) {
-                    Log.d(TAG, "run: ${e.toString()}")
+                    Log.d(TAG, "run: $e")
+                    this@MainActivity.runOnUiThread {
+                        Toast.makeText(this@MainActivity,e.toString(),Toast.LENGTH_SHORT)
+                    }
+
 
                 }
             }
